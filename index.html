@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>React</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-    <h2>This is HTML Page</h2>
-    <!-- <div class="root"></div> -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+  </head>
+  <body>
     <div id="root"></div>
-</body>
+  </body>
 
-<script>
-    const header=document.createElement("h2");
-    header.textContent="Hello JavaScript Element";
-    header.className="header";
-    // document.getElementsByClassName("root")[0].append(header)
-    document.getElementById("root").append(header)
-    
-</script>
-
+  <script src="script.js"></script>
 </html>
