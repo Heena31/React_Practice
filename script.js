@@ -6,6 +6,10 @@
 // console.log("JAVASCRIPT Element",header); 
 
 
-const reactHeader=React.createElement("h1",{className:"head",id:"reactHead"},"Hello React!!");
-ReactDOM.createRoot(document.getElementById("root")).render(reactHeader);
-console.log("REACT Element",reactHeader);
+// const reactHeader=React.createElement("h1",{className:"head", id:"reactHead", children:"Hello React!!"});
+// ReactDOM.createRoot(document.getElementById("root")).render(reactHeader);
+// console.log("REACT Element",reactHeader);
+
+
+const BabelHeader=(<h1>Hello JSX</h1>);
+ReactDOM.createRoot(document.getElementById("root")).render(BabelHeader);
