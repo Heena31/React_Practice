@@ -7,7 +7,8 @@ function sum(a,b)
 {
     return a+b;
 }
-const App=()=>(
+function App(){    
+    return (
     <>
     <h1>Hello{name}!</h1>
     <p>Your age is {age}.</p>
@@ -16,7 +17,9 @@ const App=()=>(
     <p>Value of Boolean variable is: {bool}</p>
     <p>Sum: {sum(5,6)}</p>
     </>
-)
+    )
+}
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
 
