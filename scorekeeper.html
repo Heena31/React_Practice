@@ -27,7 +27,6 @@
         ballWise.push(num);
         score += num;
       }
-      console.log(ballWise);
       rootElement.render(<App />);
     }
 
@@ -36,19 +35,18 @@
         ballWise.push(num);
         wicket++;
       }
-      console.log(ballWise);
       rootElement.render(<App />);
     }
 
     const Result = () => (
       <div>
         {ballWise.map((res, index) => (
-          <>
+          <span key={index} style={{ color: res == "W" ? "red" : "yourColor" }}>
+            {" "}
             {index % 6 == 0 ? <br /> : null}
-            <span key={index}>
-              {res == 0 ? <strong>.</strong> : res}&nbsp;&nbsp;&nbsp;
-            </span>
-          </>
+            {res == 0 ? <strong>.</strong> : res}
+            &nbsp;&nbsp;&nbsp;
+          </span>
         ))}
       </div>
     );
