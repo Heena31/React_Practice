@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>React App</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      let customers = [];
+      const capacity = 25;
+      let seatsLeft = 25;
+      var countRef = React.createRef();
+      var nameRef = React.createRef();
+      var phoneRef = React.createRef();
+      const currentTime=new Date();
+      let checkout=false;
+      let deleteDetails=true;
+
+      const clearInputs = () => {
+        countRef.current.value = "";
+        nameRef.current.value = "";
+        phoneRef.current.value = "";
+      };
+
+      // Create form submit handler here
+      const handledButton = (e) => {
+        customers.push({
+          count: countRef.current.value,
+          name: nameRef.current.value,
+          phone: phoneRef.current.value,
+        });
+        e.preventDefault();
+        rootElement.render(<App />);
+        clearInputs();
+      };
+
+      const handleCheckout=()=>{
+        checkout=true;
+        rootElement.render(<App/>)
+      }
+      const handleDelete= ()=>{
+        deleteDetails=false;
+        rootElement.render(<App/>)
+      }
+
+      const App = () => (
+        <div className="App" style={{ textAlign: "center" }}>
+          <div>
+            <h2>Total Capacity:{capacity} </h2>
+            <h2>Seats Left: {seatsLeft}</h2>
+          </div>
+
+          {/* Create a form here */}
+          <form onSubmit={handledButton}>
+            <input type="number" placeholder="Guests Count" ref={countRef} required/>
+            <br />
+            <input type="text" placeholder="Primary Guest Name" ref={nameRef} required/>
+            <br />
+            <input type="text" placeholder="Phone Number" ref={phoneRef} required/>
+            <br />
+            <br />
+            <button>Add Entry</button>
+          </form>
+          <br />
+          <br />
+          <br />
+
+          {/* Complete table to show records of customers */}
+          <table border="1px" style={{ margin: "auto" }}>
+            <thead>
+              <tr>
+                <th>Count</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Status</th>
+                <th>Remove Entry</th>
+              </tr>
+            </thead>
+            {deleteDetails?<tbody>
+              {customers.map((customer, index) => (
+                <tr key={index}>
+                  <td> {customer.count}</td>
+                  <td> {customer.name}</td>
+                  <td> {customer.phone}</td>
+                  <td>{currentTime.toLocaleTimeString()}</td>
+                  <td>-</td>
+                  <td onClick={handleCheckout}>{checkout?"Served":"Click to Checkout"}</td>
+                  <td onClick={handleDelete}>Delete</td>
+                </tr>
+              ))}
+            </tbody>:null}
+          </table>
+        </div>
+      );
+
+      const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+      rootElement.render(<App />);
+    </script>
+  </body>
+</html>

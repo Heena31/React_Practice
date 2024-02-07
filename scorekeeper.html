@@ -48,22 +48,16 @@
     );
 
     function handleSubmit(event) {
+      event.preventDefault();
+
       if (hit == "W") {
         wicket += 1;
       } else {
         score += hit;
       }
-      ballWise.unshift(
-        // <span>
-        //   {hit}
-        //   {", "}
-        //   {inputRef.current.value}
-        // </span>
-
-        `${hit}, ${inputRef.current.value} `
-
-      );
-      event.preventDefault();
+      ballWise.unshift(`${hit}, ${inputRef.current.value} `);
+      hit=0;
+      inputRef.current.value='';
       rootElement.render(<App />);
     }
 

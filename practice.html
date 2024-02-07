@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>React App</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      let nameRef = React.createRef();
+      let marksRef = React.createRef();
+      let record = [];
+
+      function handleSubmit(event) {
+        record.push({
+          name: nameRef.current.value,
+          marks: marksRef.current.value,
+        });
+        event.preventDefault();
+
+        rootElement.render(<App />);
+        nameRef.current.value = "";
+        marksRef.current.value = "";
+      }
+
+      const Form = () => (
+        <>
+          <form onSubmit={handleSubmit}>
+            <input ref={nameRef} placeholder="Name" />
+            <input ref={marksRef} placeholder="Marks" />
+            <button>Submit</button>
+          </form>
+        </>
+      );
+
+      const Result = () => (
+        <div>
+          <table border="2">
+            <thead>
+              <tr>
+                <th>Student's name</th>
+                <th>Marks</th>
+              </tr>
+            </thead>
+            <tbody>
+              {record.map((res, index) => (
+                <tr key={index}>
+                  <td>{res.name}</td>
+                  <td>{res.marks}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+
+      const App = () => (
+        <>
+          <Form />
+          <br />
+          <br />
+          <Result />
+        </>
+      );
+
+      const rootElement = ReactDOM.createRoot(document.getElementById("root"));
+      rootElement.render(<App />);
+    </script>
+  </body>
+</html>
