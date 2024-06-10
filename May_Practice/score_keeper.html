@@ -20,18 +20,39 @@
     let score = 0;
     let wicket = 0;
     let num;
+    let ballWiseResult = [];
+
     function addScore(num) {
-      if(wicket<10){
-      score += num;
-      reactElement.render(<App />);
+      if (wicket < 10) {
+        score += num;
+        ballWiseResult.push(num);
+        reactElement.render(<App />);
+        console.log(ballWiseResult);
       }
     }
 
     function addWicket() {
-      if(wicket<10)
-      {wicket += 1;
-      reactElement.render(<App />);}
+      if (wicket < 10) {
+        ballWiseResult.push("W");
+        wicket += 1;
+        reactElement.render(<App />);
+        console.log(ballWiseResult);
+      }
     }
+    const ScoreButtons = () => (
+      <>
+        <div>
+          <button onClick={() => addScore(0)}>0</button>
+          <button onClick={() => addScore(1)}>1</button>
+          <button onClick={() => addScore(2)}>2</button>
+          <button onClick={() => addScore(3)}>3</button>
+          <button onClick={() => addScore(4)}>4</button>
+          <button onClick={() => addScore(5)}>5</button>
+          <button onClick={() => addScore(6)}>6</button>
+          <button onClick={addWicket}>wicket</button>
+        </div>
+      </>
+    );
 
     const App = () => (
       <>
@@ -39,13 +60,7 @@
         <h2>
           SCORE: {score}/{wicket}
         </h2>
-        <button onClick={() => addScore(1)}>1</button>
-        <button onClick={() => addScore(2)}>2</button>
-        <button onClick={() => addScore(3)}>3</button>
-        <button onClick={() => addScore(4)}>4</button>
-        <button onClick={() => addScore(5)}>5</button>
-        <button onClick={() => addScore(6)}>6</button>
-        <button onClick={addWicket}>wicket</button>
+        <ScoreButtons />
       </>
     );
 
