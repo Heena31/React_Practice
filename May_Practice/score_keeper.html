@@ -62,6 +62,8 @@
     );
 
     function handleSubmit() {
+      event.preventDefault();
+
       if (hit == "W") {
         wicket++;
       } else {
@@ -73,7 +75,8 @@
       //   </span>);
 
       ballWiseResult.unshift(`${hit}, ${inputRef.current.value}`);
-      event.preventDefault();
+      hit=0;
+      inputRef.current.value="";
       reactElement.render(<App />);
     }
 
