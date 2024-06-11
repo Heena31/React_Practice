@@ -21,24 +21,19 @@
     let wicket = 0;
     let num;
     let ballWiseResult = [];
-    let input = 0;
+    let hit = 0;
+    let inputRef = React.createRef();
 
     function addScore(num) {
-      if (wicket < 10) {
-        score += num;
-        ballWiseResult.push(num);
-        reactElement.render(<App />);
-        console.log(ballWiseResult);
-      }
+      hit = num;
+      console.log(hit);
+      reactElement.render(<App />);
     }
 
-    function addWicket() {
-      if (wicket < 10) {
-        ballWiseResult.push("W");
-        wicket += 1;
-        reactElement.render(<App />);
-        console.log(ballWiseResult);
-      }
+    function addWicket(num) {
+      hit = "W";
+      console.log(hit);
+      reactElement.render(<App />);
     }
     const ScoreButtons = () => (
       <>
@@ -66,17 +61,37 @@
       </div>
     );
 
-    function handleSubmit(event)
-    {
+    function handleSubmit() {
+      if (hit == "W") {
+        wicket++;
+      } else {
+        score += hit;
+      }
+      console.log(inputRef.current.value);
+      // ballWiseResult.unshift(<span>
+      //   {hit}{" ,"}{inputRef.current.value}
+      //   </span>);
+
+      ballWiseResult.unshift(`${hit}, ${inputRef.current.value}`);
       event.preventDefault();
+      reactElement.render(<App />);
     }
 
     const Form = () => (
-      <form onSubmit={handleSubmit}>
-        <input/>
-        <input />
-        <button>Submit</button>
-      </form>
+      <>
+        <form onSubmit={handleSubmit}>
+          <input value={hit} />
+          <input placeholder="Add a comment" ref={inputRef} />
+          <button>Submit</button>
+        </form>
+        <hr />
+        {ballWiseResult.map((res, index) => (
+          <span key={index}>
+            {res}
+            <br />
+          </span>
+        ))}
+      </>
     );
 
     const App = () => (
@@ -88,7 +103,6 @@
         <ScoreButtons />
         <br />
         <Form />
-        <Result />
       </>
     );
     const reactElement = ReactDOM.createRoot(document.getElementById("root"));
